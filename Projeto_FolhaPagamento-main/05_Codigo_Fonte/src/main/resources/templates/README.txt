@@ -1,0 +1,1 @@
+As páginas Thymeleaf serão implementadas nesta pasta.

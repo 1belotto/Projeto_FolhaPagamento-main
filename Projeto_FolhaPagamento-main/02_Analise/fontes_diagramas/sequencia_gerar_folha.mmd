@@ -1,0 +1,17 @@
+sequenceDiagram
+    actor RH
+    participant C as FolhaController
+    participant S as FolhaService
+    participant R as FolhaRepository
+    participant CR as ColaboradorRepository
+    RH->>C: Solicita mês/ano
+    C->>S: gerarFolha(mês, ano)
+    S->>R: Verificar folha do período
+    R-->>S: Não existe folha
+    S->>CR: Buscar colaboradores ativos
+    CR-->>S: Lista de ativos
+    S->>S: Copiar dados e somar remunerações
+    S->>R: Salvar folha e itens na transação
+    R-->>S: Folha registrada
+    S-->>C: Resumo da folha
+    C-->>RH: Exibe resultado

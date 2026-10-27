@@ -1,0 +1,13 @@
+flowchart LR
+    RH[RH / Administrativo] --> LOGIN((Efetuar login))
+    RH --> CAD((Cadastrar colaborador))
+    RH --> CONS((Consultar colaboradores))
+    RH --> EDIT((Editar colaborador))
+    RH --> SAL((Alterar salário-base))
+    RH --> STATUS((Ativar / inativar colaborador))
+    RH --> GER((Gerar folha mensal))
+    RH --> HIST((Consultar folhas anteriores))
+    RH --> PDF((Exportar PDF))
+    FUNC[Funcionário] --> LOGIN
+    FUNC --> DADOS((Consultar meus dados e demonstrativos))
+    FUNC --> MEUHIST((Consultar meu histórico))

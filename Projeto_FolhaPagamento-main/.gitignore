@@ -1,0 +1,22 @@
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# Local configuration / secrets
+05_Codigo_Fonte/src/main/resources/application-local.properties
+.env
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,45 @@
+services: 
+  #container do Postgres
+  postgres:
+    #imagem oficial do postges:
+    image: postgres:16
+    #Nome do container:
+    container_name: postgres_dev
+    #reinicie automaticamente, a menos que eu tenha parado o container manualmente.
+    restart: unless-stopped
+    #variaveis de ambiente do Postgres:
+    environment:
+      #usuario do banco de dados
+      POSTGRES_USER: postgres
+      #senha do banco de dados
+      POSTGRES_PASSWORD: postgres
+      #nome do banco de dados
+      POSTGRES_DB: minha_api
+    #mapeamento de portas do container para a maquina local:
+    ports:
+      - "5432:5432"
+    #mapeamento de volume do container para a maquina local:
+    volumes:
+      - ./Dados:/var/lib/postgresql/data
+
+  #container dp pgadmin
+  pgadmin:
+    #imagem oficial do pgadmin:
+    image: dpage/pgadmin4
+    #nome do container:
+    container_name: pgadmin_dev
+    #reinicie automaticamente, a menos que eu tenha parado o container manualmente.
+    restart: unless-stopped
+    #variaveis de ambiente do pgadmin:
+    environment:
+      #email de login do pgadmin
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      #senha de login do pgadmin
+      PGADMIN_DEFAULT_PASSWORD: admin
+    #mapeamento de portas do container para a maquina local:
+    ports:
+    # via navegador para acesssar o pgadmin: http://localhost:5050
+    # ou http://127.0.0.1:5050
+      - "5050:80"
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
