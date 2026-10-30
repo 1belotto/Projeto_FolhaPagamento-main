@@ -1,66 +1,53 @@
-# Projeto Folha de Pagamento — Mercadinho Fapa
+Sistema de Folha de Pagamento — Mercadinho Fapa
+Sobre o projeto
+O Sistema de Folha de Pagamento do Mercadinho Fapa é um projeto acadêmico desenvolvido para a disciplina de Garantia da Qualidade de Software. A proposta é organizar o cadastro de funcionários, o gerenciamento das remunerações e a geração e consulta das folhas de pagamento mensais.
 
-Repositório inicial do Trabalho Integrador (A1/A3).
+A aplicação será web, com acesso por usuário e senha e permissões definidas conforme o perfil de acesso.
+Funcionalidades previstas
+- Autenticação de usuários com perfil de RH ou Funcionário.
+- Cadastro, consulta, edição, ativação e inativação de funcionários pelo RH.
+- Cadastro de matrícula, nome, cargo, categoria de remuneração, data de admissão e salário-base.
+- Alteração do salário-base e dos parâmetros de remuneração pelo RH autorizado.
+- Registro dos dados variáveis de vendas e produção para cada período de referência.
+- Geração de folhas de pagamento mensais, incluindo automaticamente os funcionários ativos.
+- Cálculo da remuneração de acordo com a categoria do funcionário.
+- Consulta de folhas anteriores pelo RH.
+- Consulta, pelo funcionário, do próprio salário, dos demonstrativos e do histórico de pagamentos.
+Categorias de remuneração
+O sistema contempla três categorias de remuneração. O cargo do funcionário e sua categoria de remuneração são informações distintas.
+- Padrão: a remuneração corresponde ao salário-base cadastrado.
+- Comissionado: a remuneração corresponde ao salário-base acrescido da comissão calculada sobre o total de vendas e o percentual de comissão.
+- Por produção: a remuneração corresponde ao salário-base acrescido do resultado da quantidade produzida multiplicada pelo valor unitário.
+Fórmulas de cálculo
+- Padrão: Remuneração = Salário-base
+- Comissionado: Remuneração = Salário-base + (Total de vendas × Percentual de comissão ÷ 100)
+- Por produção: Remuneração = Salário-base + (Quantidade produzida × Valor unitário)
+Os dados de vendas e de produção são informados para cada período de referência. Os parâmetros utilizados e os valores calculados devem ser registrados na folha para preservar o histórico.
+Regras principais
+- Os cargos definidos para o projeto são Gerente, Caixa, Repositor e RH.
+- Todo funcionário possui salário-base cadastrado.
+- Somente funcionários ativos são incluídos automaticamente nas novas folhas.
+- A geração da folha é identificada por mês e ano, não sendo permitida mais de uma folha para o mesmo período.
+- Quando não houver funcionários ativos, a geração da folha será impedida.
+- Alterações futuras no salário-base ou nos parâmetros de remuneração não modificam os valores registrados em folhas anteriores.
+- Cada funcionário pode consultar somente suas próprias informações salariais e seus demonstrativos; o RH possui acesso às funções administrativas autorizadas.
+- O sistema não realiza cálculos automáticos de impostos, contribuições ou descontos.
+Tecnologias selecionadas
+Camada / finalidade	Tecnologia
+Linguagem e backend	Java e Spring Boot
+Interface web	HTML5, CSS3 e Thymeleaf
+Gerenciamento de dependências	Maven
+Banco de dados	PostgreSQL
+Controle de versão e repositório	Git e GitHub
+Testes automatizados	JUnit
+Cobertura de código planejada	JaCoCo
 
-## Equipe
-Guilherme Belotto · Kauã Garcia · Leonardo Trinca
 
-## Objetivo
-Aplicação web acadêmica para cadastro de colaboradores e geração/consulta da folha mensal simplificada do Mercadinho Fapa, para a disciplina Garantia da Qualidade de Software.
-
-## Funcionalidades previstas
-- **RH:** login, cadastro/consulta/edição de colaboradores, alteração de salário-base, ativar/inativar, gerar folha mensal e consultar folhas anteriores.
-- **Funcionário:** login e consulta apenas dos próprios dados e do histórico de pagamentos.
-
-## Regras salariais
-- A remuneração mensal é o salário-base cadastrado; não há cálculo de impostos, descontos, bônus ou horas extras.
-- O total da folha é a soma dos salários-base dos colaboradores **ativos**.
-- Uma folha por mês/ano; folha gerada não é alterada por mudanças posteriores de salário.
-- Inativar um colaborador não apaga seu histórico.
-
-## Situação atual (A1)
-Documentação e planejamento concluídos (pastas 01 a 04 e 10), banco modelado (06) e esqueleto Maven/Spring Boot (05). **O sistema ainda não está implementado**; a implementação e a execução dos testes fazem parte da A3. Não há resultados de testes registrados.
-
-## Tecnologias previstas
-- Java 17
-- Spring Boot
-- Thymeleaf, HTML5 e CSS3
-- Spring Data JPA
-- Spring Security
-- PostgreSQL
-- Maven
-- JUnit 5, Mockito e JaCoCo
-- Git/GitHub
-
-## Estrutura
-- `01_Requisitos/`: Documento de Visão e ERS.
-- `02_Analise/`: diagramas UML e fontes editáveis.
-- `03_Projeto/`: arquitetura.
-- `04_Testes/`: plano e casos de teste.
-- `07_Executavel/`, `08_Manuais/`, `09_Homologacao/`, `11_Apresentacao/`: reservadas para a A3.
-- `05_Codigo_Fonte/`: aplicação (esqueleto inicial).
-- `06_Banco_Dados/`: scripts SQL.
-- `10_Qualidade/`: PGQ, EAP e registro de defeitos.
-
-## Preparação do banco
-1. Crie um banco PostgreSQL vazio chamado `mercadinho_fapa`.
-2. Execute `06_Banco_Dados/schema.sql`.
-3. Para dados iniciais de demonstração, execute `06_Banco_Dados/dados_iniciais.sql`.
-4. Para reiniciar a massa de testes, use `06_Banco_Dados/dados_teste.sql` **somente em banco de teste**, pois o script limpa as tabelas.
-5. O script `carga_50_colaboradores.sql` é destinado exclusivamente ao teste de desempenho.
-
-## Execução da aplicação
-O código-fonte está apenas como estrutura inicial; as funcionalidades ainda precisam ser implementadas. Configure as credenciais locais do PostgreSQL em `05_Codigo_Fonte/src/main/resources/application.properties` antes de executar. Não envie senhas reais ao GitHub.
-
-## Decisões técnicas recomendadas para fechar o escopo
-- Aplicação web com Java 17, Spring Boot, Thymeleaf, Spring Security, Spring Data JPA, PostgreSQL e Maven.
-- RH e funcionários terão login individual; funcionário só consulta os próprios dados.
-- O perfil é determinado pelo cargo (RH/Administrativo = RH; demais cargos = Funcionário).
-- Folha gerada é imutável e guarda snapshot de nome, cargo, salário e remuneração.
-- Exportação PDF fica fora do núcleo da A1/A3 inicial; só implementar se houver tempo e a equipe ratificar.
-- A remuneração simplificada é igual ao salário-base; não há descontos ou adicionais.
-
-Consulte `10_Qualidade/Registro_Decisoes_Projeto.docx` e `01_Requisitos/Matriz_Rastreabilidade_Revisada.xlsx`.
-
-## Convenções de Git
-Commits em português no formato `tipo: descrição` (docs, feat, fix, test, chore), no ramo `main`. Cada integrante commita a própria parte.
+Estrutura do projeto
+O repositório organiza os artefatos acadêmicos e os materiais do sistema em diretórios separados, incluindo requisitos, análise, projeto, testes, código-fonte, banco de dados e qualidade de software. A estrutura será atualizada conforme o desenvolvimento avançar.
+Situação do projeto
+Projeto acadêmico em planejamento e desenvolvimento. Este repositório reúne a documentação e os artefatos produzidos pela equipe. A implementação das funcionalidades e a execução dos casos de teste serão registradas conforme a evolução do projeto.
+Equipe
+- Guilherme Belotto
+- Kauã Garcia
+- Leonardo Trinca
